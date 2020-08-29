@@ -1,64 +1,39 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
-import Home from "./components/home/Home"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import Video from './components/video/Video';
+import { db } from './firebase';
 
-import Header from "./components/header/Header"
-import Checkout from './components/checkout/Checkout';
-import Login from './components/login/Login';
-import {useStateValue} from "./components/stateProvider/StateProvider"
-import {auth} from "./firebase"
 
 function App() {
 
-  const [{user}, dispatch] = useStateValue();
+  const [videos, setVideos] = useState([])
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(authUser => {
-      if(authUser) {
-        //The user is logged in
-        dispatch({
-          type: "SET_USER",
-          user: authUser
-        })
-      } else {
-        //The user is logged out
-        dispatch({
-          type: "SET_USER",
-          user: null
-        })
-      }
-    })
-
-    return () => {
-      // Any clean up operation goes in here
-      unsubscribe();
-    }
+  useEffect( () => {
+    db.collection("videos").onSnapshot(snapshot => setVideos(snapshot.docs.map(doc => doc.data())))
   }, [])
 
-  console.log("USER IS >>>>>", user)
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/checkout">
-            <Header/>
-            <Checkout/>
-          </Route>
-          <Route path="/">
-            <Header/>
-            <Home/>
-          </Route>
-        </Switch>
+      <div className="app">
+        <div className="app__videos">
+          {videos.map(
+            ({id,messages, url, likes, shares, description, channel, song}, i) => {
+              console.log(id)
+              return <Video
+                key={i}
+                messages={messages}
+                likes={likes}
+                shares={shares}
+                description={description}
+                channel={channel}
+                song={song}
+                url={url}
+              />
+            }
+             
+            )
+          }
+        </div>
       </div>
-    </Router>
   );
 }
 

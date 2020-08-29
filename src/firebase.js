@@ -1,17 +1,27 @@
 import firebase from "firebase";
 
+// const firebaseConfig = {
+//     apiKey: "AIzaSyDSOC3pmS6dgAfkSfUL-Z0NHya6JgrrMpE",
+//     authDomain: "tik-tok-clone-f94c0.firebaseapp.com",
+//     databaseURL: "https://tik-tok-clone-f94c0.firebaseio.com",
+//     projectId: "tik-tok-clone-f94c0",
+//     storageBucket: "tik-tok-clone-f94c0.appspot.com",
+//     messagingSenderId: "553236120434",
+//     appId: "1:553236120434:web:40238268aec3717e8cd3eb",
+//     measurementId: "G-TB3YQY8XQ0"
+// };
 const firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyB9wrSph4bUfZsXZC0iCBlPlULjoIvLMYQ",
-    authDomain: "clone-2c795.firebaseapp.com",
-    databaseURL: "https://clone-2c795.firebaseio.com",
-    projectId: "clone-2c795",
-    storageBucket: "clone-2c795.appspot.com",
-    messagingSenderId: "334920753365",
-    appId: "1:334920753365:web:c8246d35bdb751aa94c25c",
-    measurementId: "G-WJ6WDMR0C3"
+    apiKey: "AIzaSyDSOC3pmS6dgAfkSfUL-Z0NHya6JgrrMpE",
+    authDomain: "tik-tok-clone-f94c0.firebaseapp.com",
+    databaseURL: "https://tik-tok-clone-f94c0.firebaseio.com",
+    projectId: "tik-tok-clone-f94c0",
+    storageBucket: "tik-tok-clone-f94c0.appspot.com",
+    messagingSenderId: "553236120434",
+    appId: "1:553236120434:web:40238268aec3717e8cd3eb",
+    measurementId: "G-TB3YQY8XQ0"
 })
 
-// const db = firebaseApp.firestore();
+const db = firebaseApp.firestore();
 const auth = firebase.auth();
 
-export { auth };
+export { auth, db };
